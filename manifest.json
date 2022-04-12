@@ -1,0 +1,12 @@
+{
+  "name": "CrowdStrike Falcon Events",
+  "description": "Notification on various events within CrowdStrike Falcon cloud",
+  "version": "0.1",
+  "manifest_version": 3,
+    "permissions": [
+        "alarms"
+    ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
