@@ -9,10 +9,13 @@
   "background": {
     "service_worker": "background.js"
   },
-    "icons": {
-        "128": "assets/icons/icon128.png",
-        "32": "assets/icons/icon32.png",
-        "192": "assets/icons/icon192.png",
-        "16": "assets/icons/icon16.png"
-    }
+  "action": {
+      "default_popup": "src/popup/popup.html"
+  },
+  "icons": {
+      "128": "assets/icons/icon128.png",
+      "32": "assets/icons/icon32.png",
+      "192": "assets/icons/icon192.png",
+      "16": "assets/icons/icon16.png"
+  }
 }
