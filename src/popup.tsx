@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import { Manager } from "./falcon";
 
-class CrwdPopup extends React.PureComponent {
+interface PopupProps {
+    loggedIn: boolean;
+}
+
+class CrwdPopup extends React.PureComponent<PopupProps, {}> {
     render() {
-        if (Manager.getInstance().loggedIn()) {
+        console.log("render");
+        if (this.props.loggedIn) {
             return (
                 <p>Login successful</p>
             );
@@ -18,7 +23,7 @@ class CrwdPopup extends React.PureComponent {
 
 ReactDOM.render(
   <React.StrictMode>
-    <CrwdPopup />
+    <CrwdPopup loggedIn={Manager.getInstance().loggedIn()} />
   </React.StrictMode>,
   document.getElementById("root")
 );
