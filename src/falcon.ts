@@ -7,6 +7,6 @@ export class Manager {
         return Manager.instance;
     }
     public loggedIn(): boolean {
-        return true;
+        return false;
     }
 };
