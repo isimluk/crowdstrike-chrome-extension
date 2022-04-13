@@ -1,0 +1,28 @@
+{
+    "name": "CrowdStrike Falcon Events",
+    "description": "Notification on various events within CrowdStrike Falcon cloud",
+    "version": "0.1",
+    "manifest_version": 3,
+    "background": {
+        "service_worker": "js/background.js"
+    },
+    "icons": {
+        "128": "icons/icon128.png",
+        "32": "icons/icon32.png",
+        "192": "icons/icon192.png",
+        "16": "icons/icon16.png"
+    },
+
+    "options_ui": {
+      "page": "options.html"
+    },
+
+    "action": {
+      "default_popup": "popup.html"
+    },
+
+    "permissions": [
+        "alarms",
+        "storage"
+    ]
+}
