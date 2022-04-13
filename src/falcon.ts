@@ -1,12 +1,12 @@
 export class Manager {
-    private static instance: Manager;
-    public static getInstance(): Manager {
-        if (!Manager.instance) {
-            Manager.instance = new Manager();
-        }
-        return Manager.instance;
+  private static instance: Manager;
+  public static getInstance(): Manager {
+    if (!Manager.instance) {
+      Manager.instance = new Manager();
     }
-    public loggedIn(): boolean {
-        return false;
-    }
-};
+    return Manager.instance;
+  }
+  public loggedIn(): boolean {
+    return false;
+  }
+}
