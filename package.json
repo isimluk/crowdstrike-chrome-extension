@@ -4,11 +4,12 @@
   "description": "crowdstrike-falcon-chrome-extension",
   "main": "index.js",
   "scripts": {
-      "build": "webpack --config webpack/webpack.prod.js",
+    "build": "webpack --config webpack/webpack.prod.js",
     "watch": "webpack --config webpack/webpack.dev.js --watch",
     "style": "prettier --write \"src/**/*.{ts,tsx}\""
   },
   "dependencies": {
+    "@patternfly/react-core": "^4.202.16",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },
