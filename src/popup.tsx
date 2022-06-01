@@ -6,7 +6,7 @@ import { LoginForm } from "./login_form";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import { Box, Typography } from "@mui/material";
-import { FalconClient, FalconCloud } from "crowdstrike-falcon";
+import { FalconCloud, FalconErrorExplain } from "crowdstrike-falcon";
 
 interface CrwdPopupProps {}
 
@@ -21,9 +21,17 @@ class CrwdPopup extends React.Component<CrwdPopupProps, CrwdPopupState> {
   }
   private login(cloud: FalconCloud, clientId: string, clientSecret: string) {
     const manager = Manager.getInstance();
-    manager.login(cloud, clientId, clientSecret).then((res) => {
-      this.setState({ falcon: manager });
-    });
+    manager
+      .login(cloud, clientId, clientSecret)
+      .catch((err) => {
+        FalconErrorExplain(err).then((txt) =>
+          alert("Coud not verify login: " + txt)
+        );
+        throw err;
+      })
+      .then((res) => {
+        this.setState({ falcon: manager });
+      });
   }
 
   render() {

@@ -1,8 +1,4 @@
-import {
-  FalconClient,
-  FalconCloud,
-  FalconErrorExplain,
-} from "crowdstrike-falcon";
+import { FalconClient, FalconCloud } from "crowdstrike-falcon";
 
 export class Manager {
   async login(cloud: FalconCloud, clientId: string, clientSecret: string) {
@@ -11,12 +7,7 @@ export class Manager {
       clientId: clientId,
       clientSecret: clientSecret,
     });
-    return await this.client.sensorDownload
-      .getSensorInstallersCCIDByQuery()
-      .catch(async function (err) {
-        alert("Could verify login: " + (await FalconErrorExplain(err)));
-        throw err;
-      });
+    return await this.client.sensorDownload.getSensorInstallersCCIDByQuery();
   }
 
   private client?: FalconClient;
