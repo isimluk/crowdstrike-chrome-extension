@@ -7,18 +7,37 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import { Box, Typography } from "@mui/material";
 
-interface PopupProps {
-  loggedIn: boolean;
+interface CrwdPopupProps {}
+
+interface CrwdPopupState {
+  falcon?: Manager;
 }
 
-class CrwdPopup extends React.PureComponent<PopupProps, {}> {
+class CrwdPopup extends React.Component<CrwdPopupProps, CrwdPopupState> {
+  constructor(props: CrwdPopupProps) {
+    super(props);
+    this.state = {};
+  }
   render() {
-    console.log("render");
-    if (this.props.loggedIn) {
+    console.log("CrwdPopup#render");
+    if (this.state.falcon) {
       return <p>Login successful</p>;
     } else {
-      return <LoginForm />;
+      return (
+        <LoginForm
+          submit={(a, b, c) => {
+            console.log(a, ",", b, ",", c);
+          }}
+        />
+      );
     }
+  }
+
+  login() {
+    console.log("login");
+    this.state = {
+      falcon: Manager.getInstance(),
+    };
   }
 }
 
@@ -39,7 +58,7 @@ ReactDOM.render(
           <Box component="img" src="/icons/icon128.png" />
         </Typography>
 
-        <CrwdPopup loggedIn={Manager.getInstance().loggedIn()} />
+        <CrwdPopup />
       </Paper>
     </Container>
   </React.StrictMode>,
