@@ -6,6 +6,7 @@ import { LoginForm } from "./login_form";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import { Box, Typography } from "@mui/material";
+import { FalconClient, FalconCloud } from "crowdstrike-falcon";
 
 interface CrwdPopupProps {}
 
@@ -18,6 +19,13 @@ class CrwdPopup extends React.Component<CrwdPopupProps, CrwdPopupState> {
     super(props);
     this.state = {};
   }
+  private login(cloud: FalconCloud, clientId: string, clientSecret: string) {
+    const manager = Manager.getInstance();
+    manager.login(cloud, clientId, clientSecret).then((res) => {
+      this.setState({ falcon: manager });
+    });
+  }
+
   render() {
     console.log("CrwdPopup#render");
     if (this.state.falcon) {
@@ -26,18 +34,11 @@ class CrwdPopup extends React.Component<CrwdPopupProps, CrwdPopupState> {
       return (
         <LoginForm
           submit={(a, b, c) => {
-            console.log(a, ",", b, ",", c);
+            this.login(a, b, c);
           }}
         />
       );
     }
-  }
-
-  login() {
-    console.log("login");
-    this.state = {
-      falcon: Manager.getInstance(),
-    };
   }
 }
 
