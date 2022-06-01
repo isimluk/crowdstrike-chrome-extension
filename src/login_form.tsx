@@ -9,13 +9,17 @@ import {
   Typography,
   FormHelperText,
 } from "@mui/material";
+import { FalconCloud } from "crowdstrike-falcon";
 
 export class LoginForm extends React.PureComponent {
-  handleChange() {
+  cloudRegions: FalconCloud[] = ["us-1", "us-2", "eu-1", "us-gov-1"];
+
+  handleChange(x: SelectChangeEvent<FalconCloud>) {
     console.log("asdf");
+    console.log(x.target);
   }
   render() {
-    const age = 20;
+    const cloud: FalconCloud = "us-1";
     return (
       <>
         <Typography variant="h5">API Log-in</Typography>
@@ -25,54 +29,35 @@ export class LoginForm extends React.PureComponent {
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={age}
+            value={cloud}
             label="CrowdStrike Cloud Region"
             onChange={this.handleChange}
           >
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
+            {this.cloudRegions.map(function (region: FalconCloud, i: number) {
+              return (
+                <MenuItem key={region} value={region}>
+                  {region}
+                </MenuItem>
+              );
+            })}
           </Select>
         </FormControl>
+
         <FormControl>
-          <InputLabel htmlFor="my-input">Email address</InputLabel>
+          <InputLabel htmlFor="my-input">Client Id</InputLabel>
           <Input id="my-input" aria-describedby="my-helper-text" />
           <FormHelperText id="my-helper-text">
-            We'll never share your email.
+            New API Credentials can be established in CrowdStrike Falcon
+            console.
           </FormHelperText>
+        </FormControl>
+
+        <FormControl>
+          <InputLabel htmlFor="my-input">Client Secret</InputLabel>
+          <Input id="my-input" aria-describedby="my-helper-text" />
         </FormControl>
         <Button variant="contained">Log-in</Button>
       </>
-    );
-  }
-  renders() {
-    return (
-      <form id="loginForm">
-        <h2>CrowdStrike API: Please Log in</h2>
-        <label>
-          <strong>Client Id</strong>
-        </label>
-        <input
-          type="password"
-          id="clientId"
-          placeholder="Your API Client ID"
-          name="clientId"
-          required
-        />
-        <br />
-        <label>
-          <strong>Client Secret</strong>
-        </label>
-        <input
-          type="password"
-          id="clientId"
-          placeholder="Your Api Client Secret"
-          name="clientSecret"
-          required
-        />
-        <br />
-        <button type="submit">Log in</button>
-      </form>
     );
   }
 }
